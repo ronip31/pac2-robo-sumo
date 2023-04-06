@@ -1,7 +1,7 @@
 #include <SharpIR.h>
 #include <stdio.h>
 
-#define ir A2 //PINO ANALÓGICO EM QUE O SENSOR ESTÁ CONECTADO
+#define ir A3 //PINO ANALÓGICO EM QUE O SENSOR ESTÁ CONECTADO
 #define model 1080 //DETERMINA O MODELO DO SENSOR (1080 PARA O MODELO 2Y0A21Y OU 20150 PARA O MODELO 2Y0A02Y)
 #define sensorD A0
 #define sensorE A1
@@ -29,10 +29,14 @@ void setup() {
 
 void loop() {
 
- int distancia = SharpIR.getDistance();  //VARIÁVEL RECEBE A DISTÂNCIA MEDIDA
+  // 5v
+  float volts = analogRead(ir)*0.0048828125;  
+  int distance = 13*pow(volts, -1); 
+  delay(500);
   
-  Serial.print("Distância medida: "); //IMPRIME O TEXTO NA SERIAL
-  Serial.print(distancia); //IMPRIME NA SERIAL A DISTÂNCIA MEDIDA PELO SENSOR
+
+ Serial.print("Distância medida: "); //IMPRIME O TEXTO NA SERIAL
+  Serial.print(distance); //IMPRIME NA SERIAL A DISTÂNCIA MEDIDA PELO SENSOR
   Serial.println("cm"); //IMPRIME O TEXTO NA SERIAL
   delay(500); //INTERVALO DE 500 MILISSEGUNDOS
 
