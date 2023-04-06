@@ -3,8 +3,8 @@
 
 #define ir A2 //PINO ANALÓGICO EM QUE O SENSOR ESTÁ CONECTADO
 #define model 1080 //DETERMINA O MODELO DO SENSOR (1080 PARA O MODELO 2Y0A21Y OU 20150 PARA O MODELO 2Y0A02Y)
-#define sensorD A3
-#define sensorE A4
+#define sensorD A0
+#define sensorE A1
 #define D1 2
 #define D2 3
 #define E3 6
@@ -23,13 +23,13 @@ void setup() {
   pinMode(ENA,OUTPUT);
   pinMode(ENB,OUTPUT);
   analogWrite(ENA,130);
-  analogWrite(ENB,160);
+  analogWrite(ENB,200);
 
 }
 
 void loop() {
 
-  int distancia = SharpIR.distance();  //VARIÁVEL RECEBE A DISTÂNCIA MEDIDA
+ int distancia = SharpIR.getDistance();  //VARIÁVEL RECEBE A DISTÂNCIA MEDIDA
   
   Serial.print("Distância medida: "); //IMPRIME O TEXTO NA SERIAL
   Serial.print(distancia); //IMPRIME NA SERIAL A DISTÂNCIA MEDIDA PELO SENSOR
@@ -52,7 +52,7 @@ void loop() {
     Serial.print("Para tras");
     delay(20);   
  }*/
- if(direito < 700 && esquerdo < 700 ){
+ if(direito < 799 && esquerdo < 799 ){
    
      digitalWrite(D1, LOW);
     digitalWrite(D2, LOW);
@@ -61,9 +61,9 @@ void loop() {
  Serial.print("Parado ");
  }
     else if(direito > 800 && esquerdo > 800 ){ 
-    digitalWrite(D1, 120);
+    digitalWrite(D1, HIGH);
     digitalWrite(D2, LOW);
-    digitalWrite(E3, 120);
+    digitalWrite(E3, HIGH);
     digitalWrite(E4, LOW);
     Serial.print("Frente");  
   
